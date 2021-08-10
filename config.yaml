@@ -1,3 +1,5 @@
 Sites:
-  - Faire
-  - ViewMunich
+  Faire:
+    url: https://www.faire.com/api/search/makers-with-filters
+  ViewMunich:
+    url:
