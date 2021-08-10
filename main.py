@@ -15,11 +15,10 @@ site_list = config['Sites']
 if __name__ == "__main__":
     initialized = datetime.now()
     parser = argparse.ArgumentParser()
-    site_choices = site_list
-    parser.add_argument('--s',help='Site to Scrap',type=str)
+    site_choices = list(site_list.keys())
     parser.add_argument('--o',help='Operation',type=str)
     parser.add_argument(
-                        'market_sites',
+                        'market_site',
                         help="Market Sites Available to Scrap",
                         type=str,
                         choices=site_choices,
@@ -27,10 +26,28 @@ if __name__ == "__main__":
                         )
 
     args = parser.parse_args()
-
-    website = args.s
-    market_sites = args.market_sites
-    website_operation = args.o
+    market_site = args.market_site
+    operation = args.o
     
-    if website in site_choices:
-        print(website)
+    module = None
+    module = 'sites.' + market_site.lower()
+
+    MODULE_NAME = module
+
+    try:
+        module = import_module(MODULE_NAME)
+    
+        SiteClass = getattr(module, market_site)
+    except ModuleNotFoundError as exc:
+        print(exc)
+        print("\nThe name of the file and the class doesnt match\n")
+        print(f'to import: "{market_site}"...')
+        print(f'The file must be named "{market_site.lower()}.py')
+
+    if market_site in site_choices:
+        print(market_site)
+    
+    if operation in ('scraping', 'testing'):
+       
+        SiteClass(config,operation,market_site)
+       
