@@ -47,7 +47,6 @@ if __name__ == "__main__":
     if market_site in site_choices:
         print(market_site)
     
-    if operation in ('scraping', 'testing'):
-       
+    if operation in ('scraping', 'testing', "prescraping"):
         SiteClass(config,operation,market_site)
        
