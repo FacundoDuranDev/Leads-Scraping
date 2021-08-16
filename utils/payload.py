@@ -4,6 +4,7 @@ from datetime import datetime
 class Payload:
     def __init__(
         self,
+        site=None,
         country_code=None,
         city=None,
         currency=None,
@@ -33,7 +34,9 @@ class Payload:
         category=None,
         phone_number=None,
         email=None,
+        CreatedAt=None
                     ):
+        self._site = site
         self._country_code = country_code
         self._city = city
         self._currency = currency
@@ -63,6 +66,7 @@ class Payload:
         self._category = category
         self._phone_number = phone_number
         self._email = email
+        self._created_at = CreatedAt
 
     @property
     def country_code(self):
@@ -288,35 +292,53 @@ class Payload:
     @facebook_handle.setter
     def facebook_handle(self, new_facebook_handle):
         self._facebook_handle = new_facebook_handle
+
+    @property
+    def site(self):
+        return self._site
+    
+    @site.setter
+    def site(self, new_site):
+        self._site = new_site
+
+    @property
+    def created_at(self):
+        return self._created_at
+    
+    @created_at.setter
+    def created_at(self, new_created_at):
+        self._created_at = new_created_at
     def payload_dict(self):
         return{
-        "country_code" : self._country_code,
-        "city" : self._city,
-        "currency" : self._currency,
-        "_id" : self._id,
-        "description" : self._description,
-        "name" : self._name,
-        "likes" : self._likes,
-        "banner_image" : self._banner_image,
-        "creation_year" : self._creation_year,
-        "instagram_followers" : self._instagram_followers,
-        "instagram" : self._instagram,
-        "facebook_followers" : self._facebook_followers,
-        "facebook_handle" : self._facebook_handle,
-        "owner_name" : self._owner_name,
-        "hand_made" : self._hand_made,
-        "made_in" : self._made_in,
-        "social_media_images" : self._social_media_images,
-        "sold_on_amazon" : self._sold_on_amazon,
-        "url" : self._url,
-        "twitter_followers" : self._twitter_followers,
-        "videos" : self._videos,
-        "images" : self._images,
-        "average_rating" : self._average_rating,
-        "number_of_reviews" : self._number_of_reviews,
-        "active_products_count" : self._active_products_count,
-        "logo" : self._logo,
-        "category" : self._category,
-        "phone_number" : self._phone_number,
-        "email" : self._email,
+        "Site":self._site,
+        "CountryCode" : self._country_code,
+        "City" : self._city,
+        "Currency" : self._currency,
+        "Id" : self._id,
+        "Description" : self._description,
+        "Name" : self._name,
+        "Likes" : self._likes,
+        "BannerImage" : self._banner_image,
+        "CreationYear" : self._creation_year,
+        "InstagramFollowers" : self._instagram_followers,
+        "Instagram" : self._instagram,
+        "FacebookFollowers" : self._facebook_followers,
+        "FacebookHandle" : self._facebook_handle,
+        "OwnerName" : self._owner_name,
+        "HandMade" : self._hand_made,
+        "MadeIn" : self._made_in,
+        "SocialMediaImages" : self._social_media_images,
+        "SoldOnAmazon" : self._sold_on_amazon,
+        "Url" : self._url,
+        "TwitterFollowers" : self._twitter_followers,
+        "Videos" : self._videos,
+        "Images" : self._images,
+        "AverageRating" : self._average_rating,
+        "NumberOfReviews" : self._number_of_reviews,
+        "ActiveProductsCount" : self._active_products_count,
+        "Logo" : self._logo,
+        "Category" : self._category,
+        "PhoneNumber" : self._phone_number,
+        "Email" : self._email,
+        'CreatedAt': self._created_at
         }

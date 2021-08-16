@@ -6,15 +6,14 @@ import requests
 
 def _obtain_response(url, **kwargs):
         requestsTimeout = 5
-        method  = kwargs.get("method", "GET")  # Por defecto se realizan peticiones GET
-        headers = kwargs.get("headers", None)
-        data    = kwargs.get("data", {})
+        method  = kwargs.get("method", "GET")
+        session = kwargs.get("session",None)
         while True:
             try:
                 if method == "GET":
-                    response = requests.get(url, headers=headers, timeout=requestsTimeout)
+                    response = session.get(url, timeout=requestsTimeout)
                 else:
-                    response = requests.post(url, data=data, headers=headers)
+                    response = None
                 return response
             except requests.exceptions.ConnectionError:
                 print("Connection Error, Retrying")
@@ -27,7 +26,7 @@ def _obtain_response(url, **kwargs):
 
     # Utilizado para realizar peticiones a los episodios de forma asíncrona.
     # Por defecto se realizan de a 3 peticiones asíncronas por vez.
-def _async_requests(list_urls, max_workers=3):
+def _async_requests(list_urls, max_workers=3, session=requests):
     list_responses = []
     len_urls = len(list_urls)
     # ["url1","url2","url3","url4","url5","url6"] --> [["url1","url2","url3"], ["url4","url5","url6"]]
@@ -39,7 +38,7 @@ def _async_requests(list_urls, max_workers=3):
                 time.sleep(0.1)
                 print("ASYNC request:", url)
                 list_threads.append(
-                    executor.submit(_obtain_response, url))
+                    executor.submit(_obtain_response, url,session=session))
             for task in as_completed(list_threads):
                 list_responses.append(task.result())
         del list_threads
