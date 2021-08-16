@@ -21,7 +21,7 @@ class Mongo:
         else:
             return False
     def query_field(self,  field=None, extra_filter=None, site=None ,created_at=None ):
-        find_filter = {'site': site, 'CreatedAt': created_at}
+        find_filter = {'Site': site, 'CreatedAt': created_at}
         if extra_filter:
             find_filter.update(extra_filter)
         find_projection = {'_id': 0, field: 1,} if field else None
