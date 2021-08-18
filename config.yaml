@@ -2,4 +2,4 @@ Sites:
   Faire:
     url: https://www.faire.com/api/search/makers-with-filters
   ViewMunich:
-    url:
+    url: https://exhibitor.munichfabricstart.com/de/api/searchresult?page={}&product_tag_1=0&product_tag_2=0&product_tag_3=0&product_tag_4=0&product_tag_5=0&product_tag_6=0&product_tag_7=0&product_tag_8=0&product_tag_9=0&product_tag_10=0&product_tag_11=0&product_tag_12=0&product_tag_13=0&area=0&country=0&type=view
