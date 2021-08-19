@@ -17,7 +17,7 @@ class Payload:
         instagram_followers=None,
         instagram=None,
         facebook_followers=None,
-        facebook_handle=None,
+        facebook=None,
         owner_name=None,
         hand_made=None,
         made_in=None,
@@ -34,8 +34,10 @@ class Payload:
         category=None,
         phone_number=None,
         email=None,
-        CreatedAt=None
+        CreatedAt=None,
+        collection=None,
                     ):
+        self._collection = collection
         self._site = site
         self._country_code = country_code
         self._city = city
@@ -49,7 +51,7 @@ class Payload:
         self._instagram_followers = instagram_followers
         self._instagram = instagram
         self._facebook_followers = facebook_followers
-        self._facebook_handle = facebook_handle
+        self._facebook = facebook
         self._owner_name = owner_name
         self._hand_made = hand_made
         self._made_in = made_in
@@ -286,12 +288,12 @@ class Payload:
         self._email = new_email
     
     @property
-    def facebook_handle(self):
-        return self._facebook_handle
+    def facebook(self):
+        return self._facebook
     
-    @facebook_handle.setter
-    def facebook_handle(self, new_facebook_handle):
-        self._facebook_handle = new_facebook_handle
+    @facebook.setter
+    def facebook(self, new_facebook):
+        self._facebook = new_facebook
 
     @property
     def site(self):
@@ -308,10 +310,19 @@ class Payload:
     @created_at.setter
     def created_at(self, new_created_at):
         self._created_at = new_created_at
+    
+    @property
+    def collection(self):
+        return self._collection
+    
+    @collection.setter
+    def collection(self, new_collection):
+        self._collection = new_collection
     def payload_dict(self):
         return{
         "Site":self._site,
         "CountryCode" : self._country_code,
+        "Collection" : self._collection,
         "City" : self._city,
         "Currency" : self._currency,
         "Id" : self._id,
@@ -320,17 +331,14 @@ class Payload:
         "Likes" : self._likes,
         "BannerImage" : self._banner_image,
         "CreationYear" : self._creation_year,
-        "InstagramFollowers" : self._instagram_followers,
         "Instagram" : self._instagram,
-        "FacebookFollowers" : self._facebook_followers,
-        "FacebookHandle" : self._facebook_handle,
+        "Facebook" : self._facebook,
         "OwnerName" : self._owner_name,
         "HandMade" : self._hand_made,
         "MadeIn" : self._made_in,
         "SocialMediaImages" : self._social_media_images,
         "SoldOnAmazon" : self._sold_on_amazon,
         "Url" : self._url,
-        "TwitterFollowers" : self._twitter_followers,
         "Videos" : self._videos,
         "Images" : self._images,
         "AverageRating" : self._average_rating,
